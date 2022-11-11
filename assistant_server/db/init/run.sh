@@ -1,0 +1,1 @@
+psql -U $DB_USER -d $DB_NAME -a -f /sql_script/init.sql

@@ -1,0 +1,3 @@
+assistant_server/.env
+assistant_server/user/app/node_modules
+assistant_server/recommend/app/node_modules
