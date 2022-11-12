@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger('combined'));
-app.use('/api', router);
+app.use('/user', router);
 
 app.use(errorHandler);
 

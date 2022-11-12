@@ -1,1 +1,1 @@
-psql -U $DB_USER -d $DB_NAME -a -f /sql_script/init.sql
+psql -U $POSTGRES_USER -d $POSTGRES_DB -a -f /sql_script/init.sql
