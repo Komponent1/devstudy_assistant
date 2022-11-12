@@ -1,5 +1,4 @@
 FROM postgres:alpine
 
-RUN mkdir /backup
-
+COPY sql_script /sql_script
 COPY init /docker-entrypoint-initdb.d
