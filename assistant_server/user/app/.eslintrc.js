@@ -11,7 +11,9 @@ module.exports = {
   "plugins": ["@typescript-eslint"],
   "rules": {
     "import/prefer-default-export": 0,
-    "@typescript-eslint/no-throw-literal": 0
+    "@typescript-eslint/no-throw-literal": 0,
+    "@typescript-eslint/naming-convention": 0,
+    "consistent-return": 0
   },
   "overrides": [],
   "ignorePatterns": ['.eslintrc.js', 'node_modules/**']

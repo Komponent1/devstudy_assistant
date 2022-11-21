@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const unknnownError = (err: any, keyword: string) => {
+const unknownError = (err: any, keyword: string) => {
   console.error('ERROR LOG(unknown)', err);
   throw ({
     code: 500,
@@ -36,5 +36,5 @@ const refError = (err: any) => {
 };
 
 export default {
-  paramError, dbError, authError, refError, unknnownError,
+  paramError, dbError, authError, refError, unknownError,
 };
