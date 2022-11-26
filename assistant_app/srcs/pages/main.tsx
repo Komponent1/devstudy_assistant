@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import { connectSQLite } from '../lib';
 import { todo, Todo } from '../model';
+import { Input } from '../component';
 
 function Main() {
   const [list, setList] = useState<Todo[]>([]);
@@ -51,15 +52,8 @@ function Main() {
   }, []);
 
   return (
-    <View>
-      {list.map((to) => (
-        <Text key={to.id}>{`${to.todo}${to.date}`}</Text>
-      ))}
-      <Button title='add' onPress={add} />
-      <Button title='delete' onPress={del} />
-      <Button title='update' onPress={update} />
-    </View>
-  )
+    <Input />
+  );
 };
 
 export default Main;
