@@ -1,53 +1,67 @@
-import React, { useRef, useMemo, useCallback } from 'react';
-import { View, Text, Button,StyleSheet } from 'react-native';
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import React, { useMemo, useCallback, forwardRef } from 'react';
+import { View, Button,StyleSheet } from 'react-native';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { TextInput } from 'react-native-gesture-handler';
+import { useState } from 'react';
+import { Todo } from '../model';
 
-function Input() {
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
-
-  // renders
-  return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
-        <Button
-          onPress={handlePresentModalPress}
-          title="Present Modal"
-          color="black"
-        />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={1}
-          snapPoints={snapPoints}
-          onChange={handleSheetChanges}
-        >
-          <View style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
-            <Button onPress={() => bottomSheetModalRef.current?.dismiss()} title="close" />
-          </View>
-        </BottomSheetModal>
-      </View>
-    </BottomSheetModalProvider>
-  );
+type InputProps = {
+  addTodo: (text: string) => Promise<void>;
+  updateTodo: (id: string, text: string) => Promise<void>;
+  initTodo?: Todo;
 };
+const Input = forwardRef<BottomSheetModal, InputProps>(({
+    addTodo,
+    updateTodo,
+    initTodo,
+  }: InputProps, ref,
+) => {
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
+  const [text, setText] = useState<string>(initTodo ? initTodo.todo : '');
+  const update = useCallback(() => {
+    if (initTodo) {
+      updateTodo(initTodo.id, text).then(() => {
+        setText('');
+        (ref as any).current?.dismiss();
+      });
+    } else {
+      addTodo(text).then(() => {
+        setText('');
+        (ref as any).current?.dismiss();
+      });
+    }
+    
+  }, [text]);
+
+  return (
+    <BottomSheetModal
+      ref={ref}
+      index={1}
+      snapPoints={snapPoints}
+    >
+      <View style={styles.contentContainer}>
+        <TextInput
+          style={styles.input}
+          value={text}
+          onChangeText={setText}
+        />
+        <Button onPress={update} title="update" />
+      </View>
+    </BottomSheetModal>
+  );
+});
 
 export default Input;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    justifyContent: 'center',
-    backgroundColor: 'grey',
-  },
   contentContainer: {
     flex: 1,
     alignItems: 'center',
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });

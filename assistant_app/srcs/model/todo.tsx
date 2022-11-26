@@ -45,6 +45,12 @@ const delAll = async (db: SQLiteDatabase) => {
   );
   return result;
 };
+const del = async (db: SQLiteDatabase, id: string) => {
+  const result = await db.executeSql(
+    `DELETE FROM todo WHERE id = '${id}'`
+  );
+  return result;
+};
 const update = async (db: SQLiteDatabase, content: string, id: string) => {
   const result = await db.executeSql(
     `UPDATE todo SET 
@@ -59,5 +65,6 @@ export default {
   add,
   update,
   getAll,
+  del,
   delAll,
 };

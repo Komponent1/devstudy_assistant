@@ -123,6 +123,7 @@
 */
 
 import { NavigationContainer } from '@react-navigation/native'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Stack } from './srcs/component';
 import { Main } from './srcs/pages';
 import { connectSQLite, NativeStorage } from './srcs/lib';
@@ -145,13 +146,15 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="Main" component={Main} />
-      </Stack.Navigator>
+      <BottomSheetModalProvider>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Main" component={Main} />
+        </Stack.Navigator>
+      </BottomSheetModalProvider>
     </NavigationContainer>
   );
 }
