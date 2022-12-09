@@ -1,9 +1,10 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { connectSQLite } from '../lib';
 import { todo, Todo } from '../model';
 import { Input, List } from '../component';
+import Config from 'react-native-config';
 
 function Main() {
   const [list, setList] = useState<Todo[]>([]);
@@ -63,6 +64,7 @@ function Main() {
 
   return (
     <View>
+      <Text>{JSON.stringify(Config.API)}</Text>
       <Button title='추가' onPress={() => openEditor()} />
       <List
         todos={list}

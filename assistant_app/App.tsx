@@ -124,11 +124,14 @@
 
 import { NavigationContainer } from '@react-navigation/native'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import Config from 'react-native-config';
 import { Stack } from './srcs/component';
 import { Main } from './srcs/pages';
 import { connectSQLite, NativeStorage } from './srcs/lib';
 import { useEffect } from 'react';
 import { todo } from './srcs/model';
+
+console.log("Config", Config);
 
 function App() {
   const widgetInit = async () => {
@@ -142,7 +145,6 @@ function App() {
   useEffect(() => {
     widgetInit();
   }, []);
-  
 
   return (
     <NavigationContainer>
